@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">AboutMe</string>
+    <string name="name">Ricky</string>
+    <string name="YellowStar">Yellow Star String Resource</string>
+    <string name="bio">It’s hard (maybe impossible) to write about long poems without mentioning this poem by Walt Whitman. \n\nIt contains famous quotations such as “I am large, I contain multitudes” and “These are the days that must happen to you” and so many more. \n\nWhile these iconic sayings are short, the poem is 1,349 lines in total. \nLong poems are traditionally poems that tell stories. But Whitman breaks with tradition. \n\nInstead, he uses his conversational, stream of consciousness style to ruminate on the ideas of self, identity, and nature. \n\nLong, epic poems celebrate a hero who stands out from the rest of a community. \n\nBut in his poem, Whitman asserts the importance of the common person. \nHe highlights the significant and heroism that exists inside every individual just by existing.</string>
+    <string name="what_is_your_nickname">What is your nick name?</string>
+    <string name="done">Done</string>
+    <string name="an_additional_image">An Additional Image</string>
+</resources>

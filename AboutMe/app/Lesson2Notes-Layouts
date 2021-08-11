@@ -1,0 +1,217 @@
+Lesson 2 Notes: Layouts w/ AboutMe Project
+
+Lesson 2.1: Will be covering ConstraintLayout
+
+Lesson 2.2: Will learn about:
+     - type of VIEWS and RESOURCES and how to arrange them on screen, using Android
+         Studios LayoutEditor.
+     - Data Binding = connecting VIEWS with data
+Will build 2 apps: 1) AboutMe App and 2) Box Arrangement and Coloring
+
+Lesson 2.3: View Groups and View Hierarchies
+In Android, all the visual elements that make up a screen are VIEWS. And are all children
+     of the VIEW Class:
+Hierarchy Tree:
+VIEW
+     ViewGroup
+         LinearLayout
+         FrameLayout
+             ScrollView
+         ConstraintLayout
+     TextView
+         Button
+         EditText - entering/changing text
+     ImageView
+     Custom Views
+Share a lot of properties:
+All VIEWS have 1)Width 2)Height 3)Background 4)All can be made interactive 5)Locations(Left and Top coordinates)
+Unit for Location/Dimensions is: "dp" -> Density Independent Pixel. Abstarct unit based on physical pixel density of screen.
+     On 160 dpi screen -> 1 dp = 1 pixel; on 480 dpi screen -> 1 dp = 3 pixels, etc.
+     Devices will automatically convert from dp to pixel values. Developers only need to use "dp"
+Views that make Layouts are organized as hierarchy of views(tree).
+     ViewGroups - Views whose primary job is to contain other Views
+     Commonly a layout has a top level View Group and any number of Views/ViewGroups
+LinearLayout(LL) is a ViewGroups where you can arrange Views Vertically/Horizontally.
+     When you define LL, you set its orientation to horizontal/vertical and add Views to it.
+For AboutMe, we will use 1)LinearLayout(vertical) and 2)ScrollView(for scrollable content).
+        There are dozens of other layouts.
+Views in Layouts are Inflated to create hierarchy(tree) of VIEW Objects. If tree gets big,
+    it can slow down an app. Android offers a flat layout hierarchy for optimization - ConstraintLayout.
+ConstraintLayout - good for small number of Views/ViewGroups that might otherwise require deep nesting.
+
+Lesson 2.4: Create new app project for AboutMe
+
+Lesson 2.5: Create Layout File
+Since we turned off "Generate Layout File", we need to create  a Layout File in "res" resources folder.
+Right click res, select New, select Android Resource File.
+Name: activity_main.xml, Resource Type: Layout, Root Element: LinearLayout, Source Set:Main, Directory name: Layout
+
+Lesson 2.6: Layout Editor Basics
+
+Lesson 2.7: Adding a TextView
+    - Drag and drop a text view.
+    - Adjust textSize to 20 sp(Scale independent pixel), like dp but not only scaled by
+        pixel density but font size preference that user sets in phone settings.
+    - Create Dimensions Resource for text size. Do it in the activity_main.xml file by clicking light bulb.
+        It generates dimens.xml file if it doesn't exist already.
+    - If we run the app now, we still won't see the TextView because the Layout is not connected
+        to the Activity.
+        - To connect Layout to activity, open MainActivity.kt and add following code:
+            setContentView(R.layout.activity_main) -> says to show content of MainActivity in the given layout.
+                "R" -> means we reference a Resource
+                ".layout" -> the Resource is a layout
+                ".activity_main" -> whose file name is "activity_main"
+
+Lesson 2.8: Styling a TextView
+    - Padding is spacing added inside boundaries of view or element.
+    - Margin is spacing added outside boundaries
+    | Margin | Border | Padding | (Content) | Padding | Border | Margin |
+    - Add padding top of 8dp and margin top of
+
+    You can extract all the formatting of a View into a Style and set the style to our views.
+        - to do this, right-click the View->Refactor->Extract Style
+            Give the style a name, ie NameStyle, uncheck layout width/height/text alignment
+            the style NameStyle will get added to styles.xml
+
+Lesson 2.9: Add a TextView, ImageView, and Styling
+    - Drag ImageView from palette into appropriate spot of ComponentTree -> opens Resources window
+        for choosing an image. -> choose drawable/btn_star...
+        - rename it to star_image by clicking name and refactoring.
+    - There should be a warning "missingContentDescription" -> this is used by screen readers to describe images.
+    - add a string resource YellowStar to give content description
+    -  add top margin of 16 dp from resources.(layout_margin)
+
+Lesson 2.10: Adding a ScrollView
+    - a ScrollView is scrollable and can only contain one other view as a child which is a View
+        that it scrolls, this is commonly a LinearLayout, and inside LL, you can add other views.
+    - If you are only adding one view, you can put it directly into the ScrollView.
+    Drag from Palette a ScrollView.
+        initially will match parent in width/height and inside a LinearLayout
+        Add id for ScrollView: bio_scroll
+        Remove LinearLayout from code in xml file.
+        Add a Textview under ScrollView and call it bio_text and add style:NameStyle
+        In string.xml, create a string resource called bio and add some long text.
+        Add padding to top LinearLayout by creating resource called padding of 16 dp for start and end. For right and left sides.
+        Add lineSpacingMultiplier property to the TextView to value of 1.2, extract it as a dimension.
+
+    - After changes always Reformat Code (from Code->Reformat Code): Puts attributes in perferred order
+        and same order for all Views.
+
+Lesson 2.11: Adding an EditText for Text Input
+    - In Palette, when you click on Text you will see Ab and Ab underscore. The underscore
+        represents Editable input and the different types validate certain types on input.
+    - Select and drag a PlainText Editable View above star image. Give it id:nickname_edit
+        - Apply NameStyle to style attribute.
+        - Align text to Center.
+    - inputType attributes: specify type of input and system will validate the input for us.
+        hint -> to help user decide what to enter. Make text value empty to see hint.
+
+Lesson 2.12: Adding a Done button to accept text input.
+    - Add a basic button below EditText. Call it done_button
+        - Create a resource string done, with value of "Done"
+    - Add "style="@style/Widget.AppCompat.Button.Colored"" to get Button to match app theme.
+    - add Layout gravity to center_horizontal. Centers button horizontally in Linear Layout
+    - Add a TextView to display nickname above star image.
+        - Adjust "visibility" attribute: 3 options: visible, invisible, gone. Set to "gone"
+            invisible hides the View but it still takes up space.
+            gone hides the view and it doesn't take up space.
+            visible shows view and it takes up space.
+        - set text to empty string because we arent showing any text
+
+Lesson 2.13: Add EditText, Done button and Click Handler
+    We need to add code to MainActivity that:
+        - processes Button click by setting clickListener in onCreate
+        - Gets the text
+        - sets it in the TextView and Swaps visibility.
+    Add following code and code to hide keyboard:
+    private fun addNickName(view: View) {
+            val editText = findViewById<EditText>(R.id.nickname_edit)
+            val nickNameTextView = findViewById<TextView>(R.id.nickname_text)
+
+            nickNameTextView.text = editText.text
+            editText.visibility = View.GONE
+            view.visibility = View.GONE
+            nickNameTextView.visibility = View.VISIBLE
+
+            //Hide the Keyboard:
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view.windowToken, 0)
+    }
+
+Lesson 2.14: Data Binding
+    - findViewById() returns reference to Views. When ever we look for a reference to a View
+        this way, Android has to traverse view hiearchy to find the View/reference at Run Time.
+        Can slow down app for apps with deep View Hiearchies.
+    - To get around this there is something calle Data Binding:
+        Allows to connect a Layout to an Activity/Fragment at compile time. The compiler generates
+        a helper class, called a Binding Class when the activity is created, so it is an instance of that
+        binding class - a Binding Object.
+    - We can access the views through this generated Binding Object without any extra overhead.
+        ie. binding.image,  binding.text
+    - There is also view binding(Discussed in Lesson 1) but Data binding allows short logical expressions
+        in your XML code, and enhanced functionality with Android Jetpack libraries
+
+Lesson 2.15: Data Binding: Views
+    - You have to "enable" Data Binding
+        Open build.gradle(Module:app) file.
+        Add dataBinding{ enabled=true } to the gradle file in android{...} section
+        Sync the project.
+    - next we need to wrap XML layout with "layout" tag "<layout>...</layout>" so that our root class
+      is no longer a ViewGroup but a Layout that contains out view groups and views.
+      Cut and paste namespace declarations(start w/ "xmlns") into the start "layout" tag
+    - in MainActivity.kt file,
+        1)create a variable before onCreate():
+        private lateinit var binding: ActivityMainBinding
+        This binding object is like a layer of glue between a Layout and its Views and the data.
+        The "type" of the variable binding is the ActivityMainBinding Class is created by the compiler specifically
+        for this activity, and the name is derived from the name of the layout file which in this case
+        is "activity_main.xml"
+        - Lastly, you import the ActivityMainBinding class into MainActivity.kt:
+            import com.example.aboutme.databinding.ActivityMainBinding // happens automatically if enabled.
+        2) Replace setContentView() with following:
+            binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+            Also import dataBindingUtil into MainActivity.kt // Happens automatically.
+        3) Now you can access the views by their names in the onCreate function:
+            if done_button becomes binding.doneButton
+           Also, can access views inside nickname function.
+        Aside. you can use *.apply {} to make multiple binding calls easier to read:
+            binding.apply { ...doneButton.visibility = View.GONE...}
+        In order to refresh the UI with the new binding data, we need to invalidate all binding
+        expressions so that they get recreated with the correct data.: add "invalidateAll()"
+
+Lesson 2.16: DataBinding: Data
+    - Databinding helps with performance when binding views, but real power comes from binding data.
+    - We will create a class for our name and nickname data by creating new Kotlin class file
+      called MyName.kt
+        data class MyName {
+            var name: String = ""
+            var nickname: String = "" }
+    Instead of string resources, we store as proper data and bind that data to our views.
+    Name is currently set from an XML file with a string resource.
+        - We have to let our Layout know about the data class, so we create a data block in XML file.
+          To <data> block we add a variable block <variable> for our variable.
+          ie: <data><variable name="myName";type="com.example.android.aboutme.MyName></data>
+          Now, in out Layout file, instead of using string resource, we can reference this variable.
+               using: "android:text="@={myName.name}"
+          This gives us reference to the data but we need to create the actual data->done in MainActivity.kt Kotlin file.
+            To do this, we create an instance of the data class and set the name.
+                private val myName: MyName = MyName("Ricky Singh")
+            Then in onCreate, set the value of the myName variable that is declared and used in the layout file.
+                binding.myName = myName // May show error, but you need to update binding object so build app and error goes away.
+          Final step, is to also use binding for nickname textview:
+                android:text="@={myName.nickname}"
+             Then set nickname in addNickName function:
+                    myName?.nickname = nicknameEdit.text.toString()
+
+Lesson 2.19: Constraint LayOut(CL): ColorMyViews App
+    Constraint - a connection or alignment to another UI element, to the parent layout, or to an
+        invisible guideline.
+    Advantages of CL:
+        - can make it responsive to screens and resolutions.
+        - usually results in a flatter view hierarchy
+        - optimized for laying out its views.
+        - free form: you can place views anywhere on screen, and editor helps add constraints.
+    Challenges of CL:
+        - figuring out correct constraints may take experimenting.
+        - you can make any layout with CL, but works best for small number of elements/View Groups(<15).
+        - Notes pick up with Lesson 2.20 in next App Project: ColorMyViews App
