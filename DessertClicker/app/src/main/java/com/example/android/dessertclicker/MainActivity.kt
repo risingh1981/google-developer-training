@@ -18,6 +18,7 @@ package com.example.android.dessertclicker
 
 import android.content.ActivityNotFoundException
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -25,6 +26,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ShareCompat
 import androidx.databinding.DataBindingUtil
 import com.example.android.dessertclicker.databinding.ActivityMainBinding
+import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
 
@@ -64,6 +66,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // Adding Logging:
+        //Log.i("MainActivity","onCreate() Called")
+        // Using Timber instead for Logging:
+        Timber.i("onCreate() Called by Timber")
+
         // Use Data Binding to get reference to the views
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
@@ -93,6 +100,39 @@ class MainActivity : AppCompatActivity() {
 
         // Show the next dessert
         showCurrentDessert()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Timber.i("onStop() Called")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Timber.i("onRestart() Called")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Timber.i("onPause() Called")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Timber.i("onResume() Called")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Timber.i("onDestroy() Called")
+    }
+
+    // Overriding onStart to Log to Logcat when Activity goes from Created LC to Started LC
+    override fun onStart() {
+        super.onStart()
+        //Log.i("MainActivity","onStart Called")
+        // Use Timber instead:
+        Timber.i("onStart Called by Timber")
     }
 
     /**
