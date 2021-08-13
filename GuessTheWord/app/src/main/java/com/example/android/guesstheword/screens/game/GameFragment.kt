@@ -17,11 +17,15 @@
 package com.example.android.guesstheword.screens.game
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.NavHostFragment
 import com.example.android.guesstheword.R
 import com.example.android.guesstheword.databinding.GameFragmentBinding
 
@@ -30,14 +34,17 @@ import com.example.android.guesstheword.databinding.GameFragmentBinding
  */
 class GameFragment : Fragment() {
 
+    // ViewModel for the UI Controller:GameFragment
+    private lateinit var viewModel: GameViewModel
+
     // The current word
-    private var word = ""
+    //private var word = "" // Move to GameViewModel
 
     // The current score
-    private var score = 0
+    // private var score = 0 // Move to GameViewModel
 
     // The list of words - the front of the list is the next word to guess
-    private lateinit var wordList: MutableList<String>
+    // private lateinit var wordList: MutableList<String> // Move over to GameViewModel
 
     private lateinit var binding: GameFragmentBinding
 
@@ -52,17 +59,25 @@ class GameFragment : Fragment() {
                 false
         )
 
-        resetList()
-        nextWord()
+        // Log and Initialize viewModel:
+        Log.i("GameFragment", "Called ViewModelProvider.get()")
+        viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
+
+        //resetList()
+        //nextWord()
 
         binding.correctButton.setOnClickListener { onCorrect() }
         binding.skipButton.setOnClickListener { onSkip() }
+
+        // Creating onClick listener for End Game button:
+        binding.endGameButton.setOnClickListener { onEnd() }
         updateScoreText()
         updateWordText()
         return binding.root
 
     }
 
+    /* Move over to GameViewModel
     /**
      * Resets the list of words and randomizes the order
      */
@@ -92,19 +107,39 @@ class GameFragment : Fragment() {
         )
         wordList.shuffle()
     }
+     */
+    // Adding method for onEnd which implements code for when End Game button is pressed:
+    private fun onEnd() {
+        gameFinished()
+    }
+
+    private fun gameFinished() {
+        Toast.makeText(activity, "Game has just finished!", Toast.LENGTH_SHORT).show()
+        val action = GameFragmentDirections.actionGameToScore()
+        action.score = viewModel.score
+        NavHostFragment.findNavController(this).navigate(action)
+    }
+
 
     /** Methods for buttons presses **/
-
+    // Move code for updating data over to GameViewModel but not code for updating fragment.
     private fun onSkip() {
-        score--
-        nextWord()
+        //score--
+        //nextWord() -> replaced with updateSCoreText() and updateWordText()
+        viewModel.onSkip()
+        updateScoreText()
+        updateWordText()
     }
 
     private fun onCorrect() {
-        score++
-        nextWord()
+        //score++
+        //nextWord() -> replaced with updateSCoreText() and updateWordText()
+        viewModel.onCorrect()
+        updateScoreText()
+        updateWordText()
     }
 
+    /* Move over to GameViewModel
     /**
      * Moves to the next word in the list
      */
@@ -117,14 +152,16 @@ class GameFragment : Fragment() {
         updateScoreText()
     }
 
+     */
+
 
     /** Methods for updating the UI **/
 
     private fun updateWordText() {
-        binding.wordText.text = word
+        binding.wordText.text = viewModel.word
     }
 
     private fun updateScoreText() {
-        binding.scoreText.text = score.toString()
+        binding.scoreText.text = viewModel.score.toString()
     }
 }
