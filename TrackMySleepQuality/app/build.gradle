@@ -24,7 +24,7 @@ android {
     compileSdkVersion 30
     defaultConfig {
         applicationId "com.example.android.trackmysleepquality"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -40,6 +40,7 @@ android {
 
     // Enables data binding.
     buildFeatures {
+        viewBinding true
         dataBinding true
     }
 
@@ -48,6 +49,8 @@ android {
 dependencies {
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    // Changed to jdk8 from jdk7. Removed rxjava2, still working, now
+    // and switching back to jdk7 to see if still working. -> still working
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     // Support libraries
@@ -71,10 +74,25 @@ dependencies {
     // Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version"
-
+    /*
+    // To Add:
+    // optional - RxJava2 support for Room
+    implementation "androidx.room:room-rxjava2:$room_version"
+     */
     // Navigation
-    implementation "android.arch.navigation:navigation-fragment-ktx:$navigationVersion"
-    implementation "android.arch.navigation:navigation-ui-ktx:$navigationVersion"
+    //implementation "android.arch.navigation:navigation-fragment-ktx:$navigationVersion"
+    //implementation "android.arch.navigation:navigation-ui-ktx:$navigationVersion"
+    // Kotlin Navigation
+    implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
+    implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
+    // Feature module Support
+    implementation("androidx.navigation:navigation-dynamic-features-fragment:$nav_version")
+
+    // Testing Navigation
+    androidTestImplementation("androidx.navigation:navigation-testing:$nav_version")
+
+    // Jetpack Compose Integration
+    implementation("androidx.navigation:navigation-compose:2.4.0-alpha06")
 
     // Testing
     testImplementation 'junit:junit:4.12'
