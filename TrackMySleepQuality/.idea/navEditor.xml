@@ -8,6 +8,27 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
+                  <entry key="sleep_detail_fragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="158" />
+                            <option name="y" value="439" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_sleepDetailFragment_to_sleepTrackerFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="sleep_quality_fragment">
                     <value>
                       <LayoutPositions>
@@ -34,12 +55,17 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="256" />
-                            <option name="y" value="12" />
+                            <option name="x" value="257" />
+                            <option name="y" value="-122" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
+                            <entry key="action_sleepTrackerFragment_to_sleepDetailFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_sleepTrackerFragment_to_sleepQualityFragment">
                               <value>
                                 <LayoutPositions />

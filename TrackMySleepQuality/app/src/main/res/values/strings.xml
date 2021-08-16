@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?><!--
-  ~ Copyright 2019, The Android Open Source Project
+  ~ Copyright 2018, The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@
     <string name="app_name">Track My Sleep Quality</string>
     <string name="sleep_tracker_fragment">SleepTrackerFragment</string>
     <string name="sleep_quality_fragment">SleepQualityFragment</string>
+    <string name="sleep_detail_fragment">SleepDetailFragment</string>
 
     <!-- Button labels -->
     <string name="start">Start</string>
@@ -52,5 +53,9 @@
 
     <!-- Toast to play after Clear button has been pressed -->
     <string name="cleared_message">All your data is gone forever.</string>
-
+    <string name="header_text">Sleep Results</string>
+    <string name="close">Close</string>
+    <string name="minutes_length">%d minutes on %s</string>
+    <string name="hours_length">%d hours on %s</string>
+    <string name="seconds_length">%d seconds on %s</string>
 </resources>
