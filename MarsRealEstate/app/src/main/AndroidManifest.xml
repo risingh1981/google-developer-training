@@ -18,6 +18,9 @@
   -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.android.marsrealestate">
+    <!-- 6.8) Finally, in AndroidManifest.xml, add the internet permission with the
+    uses-permission tag inside of the root manifest tag to access the Internet.-->
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
