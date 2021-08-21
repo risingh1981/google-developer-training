@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="type_rent">किराया</string>
+    <string name="show_all">सब दिखाएं</string>
+    <string name="show_rent">किराया</string>
+    <string name="show_buy">खरीदना</string>
+    <string name="type_sale">बिक्री</string>
+    <string name="app_name">मंगल ग्रह पर रियल एस्टेट</string>
+    <string name="to_rent">किराए के लिए</string>
+</resources>

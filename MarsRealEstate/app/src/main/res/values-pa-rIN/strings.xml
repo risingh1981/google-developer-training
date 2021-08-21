@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ਮੰਗਲ ਗ੍ਰਹਿ \'ਤੇ ਰੀਅਲਸਟੇਟ</string>
+    <string name="show_rent">ਕਿਰਾਇਆ</string>
+    <string name="type_rent">ਕਿਰਾਇਆ</string>
+    <string name="show_buy">ਖਰੀਦੋ</string>
+    <string name="show_all">ਸਾਰੇ ਦਿਖਾਓ</string>
+    <string name="type_sale">ਵਿਕਰੀ</string>
+    <string name="to_rent">ਕਿਰਾਏ ਤੇ</string>
+</resources>

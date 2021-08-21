@@ -19,6 +19,16 @@ package com.example.android.marsrealestate
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+// Wheat(16K Tons), Rice(12K), Maize (0.5K), Barley(44), Pulses(10)
+// Rapeseed and Mustard(42), Sunflower(10), Total Oil Seed (52) Sugarcane(558),
+// Cotton(1.4K)
+// Vegetables: Potato, Onion, cauliflower, lady finger, tomatoes, carrot and raddish
+// Fruits: Kinnow(1200K), Guava(182K), Mangoes(113K), Pear(67K), Peach(32K), Litchi(38)
+// Orange and Malta(23K), Lemon, Ber(25K)
+// Livestock, Fisheries
+//
+//  bajra - edible seeds of pearl millet
+// paddy(unmilled rice); cereal crops like jowar(Sorghum)
 
 class MainActivity : AppCompatActivity() {
 

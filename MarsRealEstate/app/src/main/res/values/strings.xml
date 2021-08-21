@@ -22,7 +22,9 @@
     <string name="show_buy">Buy</string>
     <string name="type_rent">Rent</string>
     <string name="type_sale">Sale</string>
-    <string name="display_type">For %s</string>
-    <string name="display_price_monthly_rental">$%,.0f/month</string>
-    <string name="display_price">$%,.0f</string>
+    <string name="display_type" translatable="false">For %s</string>
+    <string name="display_price_monthly_rental" translatable="false">$%,.0f/month</string>
+    <string name="display_price" translatable="false">$%,.0f</string>
+    <string name="to_rent">To Rent</string>
+
 </resources>

@@ -3,8 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/ricky/AndroidStudioProjects/Android-Developer-Google/MarsRealEstate/app/src/main/res/drawable/text_fields.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/ricky/AndroidStudioProjects/Android-Developer-Google/MarsRealEstate/app/src/main/res/layout/activity_main.xml" value="0.10099637681159421" />
+        <entry key="..\:/Users/ricky/AndroidStudioProjects/Android-Developer-Google/MarsRealEstate/app/src/main/res/layout/fragment_detail.xml" value="0.25" />
         <entry key="..\:/Users/ricky/AndroidStudioProjects/Android-Developer-Google/MarsRealEstate/app/src/main/res/layout/fragment_overview.xml" value="0.10099637681159421" />
+        <entry key="..\:/Users/ricky/AndroidStudioProjects/Android-Developer-Google/MarsRealEstate/app/src/main/res/layout/grid_view_item.xml" value="0.1" />
+        <entry key="..\:/Users/ricky/AndroidStudioProjects/Android-Developer-Google/MarsRealEstate/app/src/main/res/layout/test.xml" value="0.625" />
       </map>
     </option>
   </component>

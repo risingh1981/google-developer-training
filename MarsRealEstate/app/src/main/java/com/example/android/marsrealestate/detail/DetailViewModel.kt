@@ -17,12 +17,55 @@
 package com.example.android.marsrealestate.detail
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModel
+import android.view.animation.Transformation
+import androidx.lifecycle.*
 import com.example.android.marsrealestate.network.MarsProperty
+import com.example.android.marsrealestate.R
 
+/**
+ *  The [ViewModel] associated with the [DetailFragment], containing information about the selected
+ *  [MarsProperty].
+ */
 /**
  * The [ViewModel] that is associated with the [DetailFragment].
  */
-class DetailViewModel(@Suppress("UNUSED_PARAMETER")marsProperty: MarsProperty, app: Application) : AndroidViewModel(app) {
+// 15.1.1) In DetailViewModel, remove the @Suppress("UNUSED_PARAMETER") annotation
+// from the class declaration.
+class DetailViewModel(marsProperty: MarsProperty, app: Application) : AndroidViewModel(app) {
+    // The external LiveData for the SelectedProperty
+    // 15.1.2) Add an encapsulated selectedProperty LiveData variable,
+    // then set its value in an init block:
+    private val _selectedProperty = MutableLiveData<MarsProperty>()
+
+    val selectedProperty: LiveData<MarsProperty>
+        get() = _selectedProperty
+
+    // Initialize the _selectedProperty MutableLiveData
+    init {
+        _selectedProperty.value = marsProperty
+    }
+
+    // The displayPropertyPrice formatted Transformation Map LiveData, which displays the sale
+    // or rental price.
+    // 15.6.2) In DetailViewModel, create a transformation map, displayPropertyPrice, to convert
+    // selectedProperty's price to a displayable string:
+    val displayPropertyPrice = Transformations.map(selectedProperty) {
+        app.applicationContext.getString(
+            when (it.isRental) {
+                true -> R.string.display_price_monthly_rental
+                false -> R.string.display_price
+            }, it.price)
+    }
+    // The displayPropertyType formatted Transformation Map LiveData, which displays the
+    // "For Rent/Sale" String
+    // 15.6.2 cont.) and a second transformation map, displayPropertyType, to display
+    // whether selectedProperty is for sale or rent:
+    val displayPropertyType = Transformations.map(selectedProperty) {
+        app.applicationContext.getString(R.string.display_type,
+            app.applicationContext.getString(
+                when (it.isRental) {
+                    true -> R.string.type_rent
+                    false -> R.string.type_sale
+                }))
+    }
 }

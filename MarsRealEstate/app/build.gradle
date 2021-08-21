@@ -31,6 +31,9 @@ android {
         versionName "1.0"
     }
     buildTypes {
+        debug {
+            pseudoLocalesEnabled true
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -38,6 +41,9 @@ android {
     }
     buildFeatures {
         dataBinding true
+    }
+    androidExtensions {
+        experimental = true
     }
 }
 
@@ -65,8 +71,11 @@ dependencies {
 
     // 6.1) In app/build.gradle add the Retrofit library dependencies.
     // Retrofit Library
+    // 8.5) Removing gradle dependency for ScalarsConverter since we are going to be
+    // using MoshiConverterFactory to have Retrofit convert the JSON response into
+    // Kotlin objects.
     implementation "com.squareup.retrofit2:retrofit: $version_retrofit"
-    implementation "com.squareup.retrofit2:converter-scalars:$version_retrofit"
+    //implementation "com.squareup.retrofit2:converter-scalars:$version_retrofit"
 
     // 8.1) Add dependencies for Moshi, Moshi-Kotlin, and the Retrofit Moshi converter
     // version_moshi = "1.8.0"
@@ -76,4 +85,15 @@ dependencies {
 
     implementation "com.squareup.retrofit2:retrofit:$version_retrofit"
     implementation "com.squareup.retrofit2:converter-moshi:$version_retrofit"
+
+    // 9.1) Add dependencies for Coroutines and the Retrofit Coroutines Adapter:
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version_kotlin_coroutines"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version_kotlin_coroutines"
+    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$version_retrofit_coroutines_adapter"
+
+    // 11.1.1) In build.gradle, add the Glide library dependency:
+    implementation "com.github.bumptech.glide:glide:$version_glide"
+
+    // 12.1.1) Add the Gradle dependency for the RecyclerView: version_recyclerview = 1.0.0
+    implementation "androidx.recyclerview:recyclerview:$version_recyclerview"
 }

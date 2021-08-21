@@ -1,0 +1,13 @@
+---
+phrase:
+  access_token: "9d1d30e87ae230f6c363a9f2bd5d59a228ec416ce80b89032f4261435114294b"
+  file_format: "xml"
+  project_id: "4b1c403372e28ca9ae2cb4f48b6abbf4"
+  pull:
+    targets: []
+  push:
+    sources:
+    - file: "./app/src/main/res/values/strings.xml"
+      params:
+        locale_id: "da86cd519cd5f4bc0fa1c5d80240440e"
+        update_translations: true
