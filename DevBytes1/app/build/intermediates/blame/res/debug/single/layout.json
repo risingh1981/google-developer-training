@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "C:\\Users\\ricky\\AndroidStudioProjects\\Android-Developer-Google\\DevBytes\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_dev_byte.xml",
+        "source": "C:\\Users\\ricky\\AndroidStudioProjects\\Android-Developer-Google\\DevBytes\\app\\src\\main\\res\\layout\\fragment_dev_byte.xml"
+    },
+    {
+        "merged": "C:\\Users\\ricky\\AndroidStudioProjects\\Android-Developer-Google\\DevBytes\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\devbyte_item.xml",
+        "source": "C:\\Users\\ricky\\AndroidStudioProjects\\Android-Developer-Google\\DevBytes\\app\\src\\main\\res\\layout\\devbyte_item.xml"
+    }
+]

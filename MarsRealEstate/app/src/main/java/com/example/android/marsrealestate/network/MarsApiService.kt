@@ -85,7 +85,7 @@ interface MarsApiService{
     // 16.2) Add a @Query("filter") parameter to getProperties() so we can filter properties
     // based on the MarsApiFilter enum values. Looks like, they took out "deferred"
     @GET("realestate")
-    fun getProperties(@Query("filter") type: String): List<MarsProperty>
+    fun getProperties(@Query("filter") type: String): Deferred<List<MarsProperty>>
 }
 
 // 6.5) Passing in the service API you just defined, create a public object called MarsApi

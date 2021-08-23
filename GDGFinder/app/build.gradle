@@ -91,4 +91,5 @@ dependencies {
 
     // Client for retrieving location
     implementation "com.google.android.gms:play-services-location:17.0.0"
+    implementation 'androidx.core:core:1.6.0'
 }

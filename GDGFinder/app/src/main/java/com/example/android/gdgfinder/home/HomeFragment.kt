@@ -22,7 +22,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
+import com.example.android.gdgfinder.R
 import com.example.android.gdgfinder.databinding.HomeFragmentBinding
 
 class HomeFragment : Fragment() {
@@ -37,9 +41,25 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        // 10.8. Bind HomeFragment binding to home_fragment layout.
+        //In home/HomeFragment.kt, define a binding variable. Use HomeFragmentBinding.inflate
+        // to inflate the layout. Then assign the viewModel binding.
         val binding = HomeFragmentBinding.inflate(inflater)
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        binding.viewModel = viewModel
 
+        // 10.9. Register an observer on navigateToSearch.
+        // Pass viewLifecycleOwner as the first argument.**
+        // When shouldNagivate is true, use the navController to navigate to gdgListFragment
+        // And remember to call onNavigatedToSearch() once navigation is complete!
+        viewModel.navigateToSearch.observe(viewLifecycleOwner,
+            Observer<Boolean> { shouldNavigate ->
+                if (shouldNavigate==true){
+                    val navController = binding.root.findNavController()
+                    navController.navigate(R.id.action_homeFragment_to_gdgListFragment)
+                    viewModel.onNavigatedToSearch()
+                }
+            })
         return binding.root
     }
 }

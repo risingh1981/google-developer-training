@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 Google Inc.
+ * Copyright 2018, The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,6 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
  */
 
 package com.example.android.devbyteviewer.domain
@@ -29,11 +30,11 @@ import com.example.android.devbyteviewer.util.smartTruncate
 /**
  * Videos represent a devbyte that can be played.
  */
-data class DevByteVideo(val title: String,
-                        val description: String,
-                        val url: String,
-                        val updated: String,
-                        val thumbnail: String) {
+data class Video(val title: String,
+                 val description: String,
+                 val url: String,
+                 val updated: String,
+                 val thumbnail: String) {
 
     /**
      * Short description is used for displaying truncated descriptions in the UI

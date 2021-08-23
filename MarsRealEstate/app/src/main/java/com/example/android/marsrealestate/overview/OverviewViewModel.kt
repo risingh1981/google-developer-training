@@ -154,15 +154,15 @@ class OverviewViewModel : ViewModel() {
         coroutineScope.launch {
             // 16.4) Pass the filter.value to retrofitService.getProperties(), they
             // also removed the Deferred part in solution.
-            //var getPropertiesDeferred = MarsApi.retrofitService.getProperties(filter.value)
+            var getPropertiesDeferred = MarsApi.retrofitService.getProperties(filter.value)
             _status.value = MarsApiStatus.LOADING
             try {
                 //_status.value = MarsApiStatus.LOADING
-                _properties.value = MarsApi.retrofitService.getProperties(filter.value)
-                //var listResult = getPropertiesDeferred.await()
+                //_properties.value = MarsApi.retrofitService.getProperties(filter.value)
+                var listResult = getPropertiesDeferred.await()
                 _status.value = MarsApiStatus.DONE
                 //_response.value = "Success ${listResult.size} Properties Retrieved"
-                //_properties.value = listResult
+                _properties.value = listResult
 
             } catch (t: Throwable) {
                 //Log.i("In Catch with:","Exception:$t")

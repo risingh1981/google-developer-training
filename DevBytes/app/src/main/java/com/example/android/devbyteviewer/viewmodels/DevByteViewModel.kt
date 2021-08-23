@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 Google Inc.
+ * Copyright 2018, The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,20 +12,18 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
  */
 
 package com.example.android.devbyteviewer.viewmodels
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
-import com.example.android.devbyteviewer.domain.DevByteVideo
-import com.example.android.devbyteviewer.network.DevByteNetwork
+import androidx.lifecycle.*
+import com.example.android.devbyteviewer.database.getDatabase
+import com.example.android.devbyteviewer.domain.Video
+import com.example.android.devbyteviewer.network.Network
 import com.example.android.devbyteviewer.network.asDomainModel
+import com.example.android.devbyteviewer.repository.VideosRepository
 import kotlinx.coroutines.*
 import java.io.IOException
 
@@ -39,48 +37,65 @@ import java.io.IOException
  * reference to applications across rotation since Application is never recreated during actiivty
  * or fragment lifecycle events.
  */
+@InternalCoroutinesApi
 class DevByteViewModel(application: Application) : AndroidViewModel(application) {
 
+    /**
+     *
+     */
+
+    /**
+     *
+     */
+    // 15.2. Create the database singleton.
+    // Define a database variable and assign it to getDatabase(), passing the application.
+    // Kotline gives following Error without Annotation:
+    // This is an internal kotlinx.coroutines API that should not be used from outside of
+    // kotlinx.coroutines. No compatibility guarantees are provided.It is recommended to
+    // report your use-case of internal API to kotlinx.coroutines issue tracker, so stable
+    // API could be provided instead
+    @InternalCoroutinesApi
+    private val database = getDatabase(application)
+
+    // 15.3. Then create your repository.
+    // Define val videosRepository and assign it to a VideosRepository using the database
+    // singleton.
+    @InternalCoroutinesApi
+    val videosRepository = VideosRepository(database)
+
+    /**
+     * init{} is called immediately when this ViewModel is created.
+     */
+    // 15.4. Refresh the videos using the repository.
+    // Create an init block and launch a coroutine to call videosRepository.refreshVideos().
+    // Kotlin says to add @InternalCoroutinesApi to class DevByteViewModel
+    init {
+        viewModelScope.launch {
+            videosRepository.refreshVideos()
+        }
+    }
+
+    // 15.5. Create the playlist.
+    // Get videos LiveData from the repository and assign it to a playlist variable.
+    val playlist = videosRepository.videos
+
+    // 15.1. Delete the code that will be replaced by the repository:
+    //
+    //In DevByteViewModel, delete _playlist, playlist variables, the init block, and
+    // refreshDataFromNetwork() function. We'll replace this code with the repository.
+    /*
     /**
      * A playlist of videos that can be shown on the screen. This is private to avoid exposing a
      * way to set this value to observers.
      */
-    private val _playlist = MutableLiveData<List<DevByteVideo>>()
+    private val _playlist = MutableLiveData<List<Video>>()
 
     /**
      * A playlist of videos that can be shown on the screen. Views should use this to get access
      * to the data.
      */
-    val playlist: LiveData<List<DevByteVideo>>
+    val playlist: LiveData<List<Video>>
         get() = _playlist
-
-
-
-    /**
-     * Event triggered for network error. This is private to avoid exposing a
-     * way to set this value to observers.
-     */
-    private var _eventNetworkError = MutableLiveData<Boolean>(false)
-
-    /**
-     * Event triggered for network error. Views should use this to get access
-     * to the data.
-     */
-    val eventNetworkError: LiveData<Boolean>
-        get() = _eventNetworkError
-
-    /**
-     * Flag to display the error message. This is private to avoid exposing a
-     * way to set this value to observers.
-     */
-    private var _isNetworkErrorShown = MutableLiveData<Boolean>(false)
-
-    /**
-     * Flag to display the error message. Views should use this to get access
-     * to the data.
-     */
-    val isNetworkErrorShown: LiveData<Boolean>
-        get() = _isNetworkErrorShown
 
     /**
      * init{} is called immediately when this ViewModel is created.
@@ -94,26 +109,18 @@ class DevByteViewModel(application: Application) : AndroidViewModel(application)
      * background thread.
      */
     private fun refreshDataFromNetwork() = viewModelScope.launch {
-
         try {
-             val playlist = DevByteNetwork.devbytes.getPlaylist()
+            val playlist = Network.devbytes.getPlaylist().await()
             _playlist.postValue(playlist.asDomainModel())
-
-            _eventNetworkError.value = false
-            _isNetworkErrorShown.value = false
-
         } catch (networkError: IOException) {
-            // Show a Toast error message and hide the progress bar.
-            _eventNetworkError.value = true
+            // Show an infinite loading spinner if the request fails
+            // challenge exercise: show an error to the user if the network request fails
         }
     }
 
     /**
-     * Resets the network error flag.
      */
-    fun onNetworkErrorShown() {
-        _isNetworkErrorShown.value = true
-    }
+     */
 
     /**
      * Factory for constructing DevByteViewModel with parameter

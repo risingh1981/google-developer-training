@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!--
-  ~ Copyright (C) 2019 Google Inc.
+  ~ Copyright 2018, The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -14,6 +14,7 @@
   ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
+  ~
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -24,7 +25,7 @@
 
         <variable
             name="video"
-            type="com.example.android.devbyteviewer.domain.DevByteVideo" />
+            type="com.example.android.devbyteviewer.domain.Video" />
 
         <variable
             name="videoCallback"
@@ -99,7 +100,7 @@
                 app:layout_constraintStart_toStartOf="@+id/left_well"
                 app:layout_constraintTop_toBottomOf="@+id/title"
                 app:layout_constraintBottom_toBottomOf="parent"
-                tools:text="this is a video @android:string/fingerprint_icon_content_description" />
+                tools:text="this is a vedeo @android:string/fingerprint_icon_content_description" />
 
             <ImageView
                 android:id="@+id/video_thumbnail"

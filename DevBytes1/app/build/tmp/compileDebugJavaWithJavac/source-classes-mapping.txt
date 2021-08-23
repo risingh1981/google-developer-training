@@ -1,0 +1,27 @@
+com/example/android/devbyteviewer/BR.java
+ com.example.android.devbyteviewer.BR
+androidx/databinding/DataBinderMapperImpl.java
+ androidx.databinding.DataBinderMapperImpl
+com/example/android/devbyteviewer/DataBindingTriggerClass.java
+ com.example.android.devbyteviewer.DataBindingTriggerClass
+com/example/android/devbyteviewer/databinding/FragmentDevByteBindingImpl.java
+ com.example.android.devbyteviewer.databinding.FragmentDevByteBindingImpl
+com/example/android/devbyteviewer/databinding/FragmentDevByteBinding.java
+ com.example.android.devbyteviewer.databinding.FragmentDevByteBinding
+androidx/databinding/library/baseAdapters/BR.java
+ androidx.databinding.library.baseAdapters.BR
+com/example/android/devbyteviewer/DataBinderMapperImpl.java
+ com.example.android.devbyteviewer.DataBinderMapperImpl
+ com.example.android.devbyteviewer.DataBinderMapperImpl$InnerBrLookup
+ com.example.android.devbyteviewer.DataBinderMapperImpl$InnerLayoutIdLookup
+androidx/databinding/DataBindingComponent.java
+ androidx.databinding.DataBindingComponent
+com/example/android/devbyteviewer/databinding/DevbyteItemBinding.java
+ com.example.android.devbyteviewer.databinding.DevbyteItemBinding
+com/example/android/devbyteviewer/BuildConfig.java
+ com.example.android.devbyteviewer.BuildConfig
+com/example/android/devbyteviewer/generated/callback/OnClickListener.java
+ com.example.android.devbyteviewer.generated.callback.OnClickListener
+ com.example.android.devbyteviewer.generated.callback.OnClickListener$Listener
+com/example/android/devbyteviewer/databinding/DevbyteItemBindingImpl.java
+ com.example.android.devbyteviewer.databinding.DevbyteItemBindingImpl
